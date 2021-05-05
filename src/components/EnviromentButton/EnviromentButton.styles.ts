@@ -14,7 +14,7 @@ export const EnviromentButtonWrapper = styled(RectButton)<EnviromentButtonWrappe
     justify-content: center;
     align-items: center;
     border-radius: 12px;
-    margin: 0 10px 0 0;
+    margin: 0 5px;
 
     ${(props) =>
         props.isActive &&

@@ -32,3 +32,10 @@ export const SelectionList = styled.FlatList`
     padding-bottom: 5px;
     margin: 32px 0 32px 32px;
 `;
+
+export const SelectionListPlantsWrapper = styled.View`
+    flex: 1;
+    padding: 0 32px;
+`;
+
+export const SelectionListPlants = styled.FlatList``;
