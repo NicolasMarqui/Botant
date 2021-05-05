@@ -6,11 +6,13 @@ interface ButtonProps extends TouchableOpacityProps {
     title: string;
 }
 
-const Button: React.FC<ButtonProps> = ({ title }) => {
+const Button = ({ title, ...rest }: ButtonProps) => {
     return (
-        <ButtonWrapper>
+        // @ts-ignore
+        <ButtonWrapper {...rest}>
             <ButtonText>{title}</ButtonText>
         </ButtonWrapper>
     );
 };
+
 export default Button;
