@@ -1,6 +1,6 @@
 import { fonts } from "./../../utils/theme/fonts";
 import styled, { css } from "styled-components/native";
-import { KeyboardAvoidingView } from "react-native";
+import { KeyboardAvoidingView, TouchableWithoutFeedback } from "react-native";
 
 export const IdentificationWrapper = styled.SafeAreaView`
     flex: 1;
@@ -11,6 +11,13 @@ export const IdentificationWrapper = styled.SafeAreaView`
 `;
 
 export const IdentificationKeyboard = styled(KeyboardAvoidingView)`
+    flex: 1;
+    width: 100%;
+    align-items: center;
+    justify-content: space-around;
+`;
+
+export const IdentificationCloseKeyboard = styled(TouchableWithoutFeedback)`
     flex: 1;
     width: 100%;
     align-items: center;

@@ -1,9 +1,9 @@
+import { useNavigation } from "@react-navigation/native";
 import React, { useState } from "react";
+import { Keyboard, Platform } from "react-native";
 import Button from "../../components/Button";
 // prettier-ignore
-import { IdentificationContent, IdentificationEmoji, IdentificationForm ,IdentificationInput, IdentificationWrapper, IdentificationCall, IdentificationFooter, IdentificationKeyboard, IdentificationHeader} from './Identification.styles';
-import { Platform } from "react-native";
-import { useNavigation } from "@react-navigation/native";
+import { IdentificationCall, IdentificationCloseKeyboard, IdentificationContent, IdentificationEmoji, IdentificationFooter, IdentificationForm, IdentificationHeader, IdentificationInput, IdentificationKeyboard, IdentificationWrapper } from './Identification.styles';
 
 const Identification: React.FC = ({}) => {
     const navigation = useNavigation();
@@ -21,37 +21,45 @@ const Identification: React.FC = ({}) => {
         setName(value);
     };
 
-    const handleSubmit = () => navigation.navigate("Confirmation");
+    const handleSubmit = () => {
+        if (!name) return;
+        navigation.navigate("Confirmation");
+    };
 
     return (
         <IdentificationWrapper>
             <IdentificationKeyboard
                 behavior={Platform.OS === "ios" ? "padding" : "height"}
             >
-                <IdentificationContent>
-                    <IdentificationForm>
-                        <IdentificationHeader>
-                            <IdentificationEmoji>
-                                {!isFilled ? "😀" : "😄"}
-                            </IdentificationEmoji>
-                            <IdentificationCall>
-                                How can {"\n"}
-                                we call you?
-                            </IdentificationCall>
-                        </IdentificationHeader>
-                        <IdentificationInput
-                            placeholder="Your name here"
-                            onFocus={handleInputFocus}
-                            onBlur={handleInputBlur}
-                            isFocused={isFocused || isFilled}
-                            onChangeText={handleInputChange}
-                            onSubmitEditing={handleSubmit}
-                        />
-                        <IdentificationFooter>
-                            <Button title="Confirm" onPress={handleSubmit} />
-                        </IdentificationFooter>
-                    </IdentificationForm>
-                </IdentificationContent>
+                <IdentificationCloseKeyboard onPress={Keyboard.dismiss}>
+                    <IdentificationContent>
+                        <IdentificationForm>
+                            <IdentificationHeader>
+                                <IdentificationEmoji>
+                                    {!isFilled ? "😀" : "😄"}
+                                </IdentificationEmoji>
+                                <IdentificationCall>
+                                    How can {"\n"}
+                                    we call you?
+                                </IdentificationCall>
+                            </IdentificationHeader>
+                            <IdentificationInput
+                                placeholder="Your name here"
+                                onFocus={handleInputFocus}
+                                onBlur={handleInputBlur}
+                                isFocused={isFocused || isFilled}
+                                onChangeText={handleInputChange}
+                                onSubmitEditing={handleSubmit}
+                            />
+                            <IdentificationFooter>
+                                <Button
+                                    title="Confirm"
+                                    onPress={handleSubmit}
+                                />
+                            </IdentificationFooter>
+                        </IdentificationForm>
+                    </IdentificationContent>
+                </IdentificationCloseKeyboard>
             </IdentificationKeyboard>
         </IdentificationWrapper>
     );
