@@ -1,4 +1,4 @@
-import { fonts } from "./../../utils/theme/fonts";
+import { fonts } from "../../utils/theme/fonts";
 import { StatusBar, Dimensions } from "react-native";
 import styled from "styled-components/native";
 import { Entypo } from "@expo/vector-icons";

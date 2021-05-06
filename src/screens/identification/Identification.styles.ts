@@ -1,4 +1,4 @@
-import { fonts } from "./../../utils/theme/fonts";
+import { fonts } from "../../utils/theme/fonts";
 import styled, { css } from "styled-components/native";
 import { KeyboardAvoidingView, TouchableWithoutFeedback } from "react-native";
 

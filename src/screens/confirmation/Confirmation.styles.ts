@@ -1,4 +1,4 @@
-import { fonts } from "./../../utils/theme/fonts";
+import { fonts } from "../../utils/theme/fonts";
 import styled from "styled-components/native";
 import { StatusBar } from "react-native";
 

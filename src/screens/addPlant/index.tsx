@@ -4,7 +4,7 @@ import { AddPlantAbout, AddPlantAlertLabel, AddPlantController, AddPlantDateTime
 import { SvgFromUri } from "react-native-svg";
 import waterDrop from "../../../assets/images/waterdrop.png";
 import Button from "../../components/Button";
-import { useRoute } from "@react-navigation/core";
+import { useNavigation, useRoute } from "@react-navigation/core";
 import { Params } from "../../utils/types";
 import DateTimePicker, { Event } from "@react-native-community/datetimepicker";
 import { Alert, Platform } from "react-native";
@@ -12,7 +12,9 @@ import { format, isBefore } from "date-fns";
 import { savePlant } from "../../libs/storage";
 
 const AddPlant: React.FC = ({}) => {
+    const navigation = useNavigation();
     const route = useRoute();
+
     const [selectedDateTime, setSelectedDateTime] = useState(new Date());
     const [showDatePicker, setshowDatePicker] = useState(Platform.OS === "ios");
 
@@ -38,6 +40,15 @@ const AddPlant: React.FC = ({}) => {
             await savePlant({
                 ...plant,
                 dateTimeNotification: selectedDateTime,
+            });
+
+            navigation.navigate("Confirmation", {
+                title: "All set",
+                subtitle:
+                    "Don't worry, we will always remind you to take care of your plant with a whole lotta love.",
+                buttonTitle: "Thanks a bunch :D",
+                icon: "hug",
+                nextScreen: "myPlants",
             });
         } catch (e) {
             Alert.alert("Something went wrong! 🤨");

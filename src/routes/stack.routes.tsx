@@ -1,11 +1,12 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 
-import Welcome from "../screens/welcome";
-import Identification from "../screens/identification";
-import Confirmation from "../screens/confirmation";
-import PlantSelection from "../screens/plantSelection";
-import AddPlant from "../screens/addPlant";
+import Welcome from "../screens/Welcome";
+import Identification from "../screens/Identification";
+import Confirmation from "../screens/Confirmation";
+import AddPlant from "../screens/AddPlant";
+import MyPlants from "../screens/MyPlants";
+import AuthRoutes from "./tab.routes";
 
 const StackRoutes = createStackNavigator();
 
@@ -24,8 +25,9 @@ const AppRouter: React.FC = () => (
             component={Identification}
         />
         <StackRoutes.Screen name="Confirmation" component={Confirmation} />
-        <StackRoutes.Screen name="plantSelection" component={PlantSelection} />
+        <StackRoutes.Screen name="plantSelection" component={AuthRoutes} />
         <StackRoutes.Screen name="addPlant" component={AddPlant} />
+        <StackRoutes.Screen name="myPlants" component={AuthRoutes} />
     </StackRoutes.Navigator>
 );
 

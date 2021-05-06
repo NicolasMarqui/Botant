@@ -27,7 +27,14 @@ const Identification: React.FC = ({}) => {
 
         try {
             await AsyncStorage.setItem("@botant:user", name);
-            navigation.navigate("Confirmation");
+            navigation.navigate("Confirmation", {
+                title: "All set",
+                subtitle:
+                    "Now let's start taking care of your plants very carefully.",
+                buttonTitle: "Start now",
+                icon: "smile",
+                nextScreen: "plantSelection",
+            });
         } catch {
             Alert.alert("Something went wrong! 😣");
         }
