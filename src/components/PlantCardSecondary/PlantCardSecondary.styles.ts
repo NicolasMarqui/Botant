@@ -37,3 +37,16 @@ export const PlantCardSecondaryTime = styled.Text`
     font-family: ${fonts.headingFont};
     color: ${(props) => props.theme.body_dark};
 `;
+
+export const PlantCardSecondaryRemove = styled(RectButton)`
+    width: 100px;
+    height: 85px;
+    background-color: ${(props) => props.theme.red};
+    margin-top: 15px;
+    border-radius: 20px;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    right: 20px;
+    padding-left: 15px;
+`;

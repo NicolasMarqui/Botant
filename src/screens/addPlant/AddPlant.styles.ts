@@ -2,6 +2,8 @@ import { getBottomSpace } from "react-native-iphone-x-helper";
 import styled from "styled-components/native";
 import { fonts } from "../../utils/theme/fonts";
 
+export const AddPlantScroll = styled.ScrollView``;
+
 export const AddPlantWrapper = styled.View`
     flex: 1;
     justify-content: space-between;

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 // prettier-ignore
-import { AddPlantAbout, AddPlantAlertLabel, AddPlantController, AddPlantDateTimePickerWrapper ,AddPlantDateTimePicker, AddPlantInfoWrapper, AddPlantName, AddPlantTipContainer, AddPlantTipImage, AddPlantTipText, AddPlantWrapper} from "./AddPlant.styles";
+import { AddPlantAbout, AddPlantAlertLabel, AddPlantController, AddPlantDateTimePickerWrapper ,AddPlantDateTimePicker, AddPlantInfoWrapper, AddPlantName, AddPlantTipContainer, AddPlantTipImage, AddPlantTipText, AddPlantWrapper, AddPlantScroll} from "./AddPlant.styles";
 import { SvgFromUri } from "react-native-svg";
 import waterDrop from "../../../assets/images/waterdrop.png";
 import Button from "../../components/Button";
@@ -56,47 +56,52 @@ const AddPlant: React.FC = ({}) => {
     };
 
     return (
-        <AddPlantWrapper>
-            <AddPlantInfoWrapper>
-                <SvgFromUri uri={plant.photo} height={150} width={150} />
-                <AddPlantName>{plant.name}</AddPlantName>
-                <AddPlantAbout>{plant.about}</AddPlantAbout>
-            </AddPlantInfoWrapper>
+        <AddPlantScroll
+            showsVerticalScrollIndicator={false}
+            contentContainerStyle={{ flex: 1, justifyContent: "space-between" }}
+        >
+            <AddPlantWrapper>
+                <AddPlantInfoWrapper>
+                    <SvgFromUri uri={plant.photo} height={150} width={150} />
+                    <AddPlantName>{plant.name}</AddPlantName>
+                    <AddPlantAbout>{plant.about}</AddPlantAbout>
+                </AddPlantInfoWrapper>
 
-            <AddPlantController>
-                <AddPlantTipContainer>
-                    <AddPlantTipImage source={waterDrop} />
-                    <AddPlantTipText>{plant.water_tips}</AddPlantTipText>
-                </AddPlantTipContainer>
+                <AddPlantController>
+                    <AddPlantTipContainer>
+                        <AddPlantTipImage source={waterDrop} />
+                        <AddPlantTipText>{plant.water_tips}</AddPlantTipText>
+                    </AddPlantTipContainer>
 
-                <AddPlantAlertLabel>
-                    Choose the best time to be remembered
-                </AddPlantAlertLabel>
+                    <AddPlantAlertLabel>
+                        Choose the best time to be remembered
+                    </AddPlantAlertLabel>
 
-                {showDatePicker && (
-                    <DateTimePicker
-                        value={selectedDateTime}
-                        mode="time"
-                        display="spinner"
-                        onChange={handleChangeTime}
-                    />
-                )}
+                    {showDatePicker && (
+                        <DateTimePicker
+                            value={selectedDateTime}
+                            mode="time"
+                            display="spinner"
+                            onChange={handleChangeTime}
+                        />
+                    )}
 
-                {Platform.OS === "android" && (
-                    <AddPlantDateTimePickerWrapper
-                        onPress={() =>
-                            setshowDatePicker((oldState) => !oldState)
-                        }
-                    >
-                        <AddPlantDateTimePicker>
-                            {`Change ${format(selectedDateTime, "HH:mm")}`}
-                        </AddPlantDateTimePicker>
-                    </AddPlantDateTimePickerWrapper>
-                )}
+                    {Platform.OS === "android" && (
+                        <AddPlantDateTimePickerWrapper
+                            onPress={() =>
+                                setshowDatePicker((oldState) => !oldState)
+                            }
+                        >
+                            <AddPlantDateTimePicker>
+                                {`Change ${format(selectedDateTime, "HH:mm")}`}
+                            </AddPlantDateTimePicker>
+                        </AddPlantDateTimePickerWrapper>
+                    )}
 
-                <Button title="Save" onPress={handleSave} />
-            </AddPlantController>
-        </AddPlantWrapper>
+                    <Button title="Save" onPress={handleSave} />
+                </AddPlantController>
+            </AddPlantWrapper>
+        </AddPlantScroll>
     );
 };
 export default AddPlant;

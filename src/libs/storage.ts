@@ -2,7 +2,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { format } from "date-fns";
 import { PlantsProps } from "../utils/types";
 
-interface StoragePlantProps {
+export interface StoragePlantProps {
     [id: string]: {
         data: PlantsProps;
     };
@@ -60,4 +60,12 @@ export const loadPlant = async (): Promise<PlantsProps[]> => {
     } catch (e) {
         throw new Error(e);
     }
+};
+
+export const deletePlant = async (id: string): Promise<void> => {
+    const data = await AsyncStorage.getItem("@botant:plants");
+    const plants = data ? (JSON.parse(data) as StoragePlantProps) : {};
+
+    delete plants[id];
+    await AsyncStorage.setItem("@botant:plants", JSON.stringify(plants));
 };
