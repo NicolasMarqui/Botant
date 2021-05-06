@@ -32,7 +32,7 @@ export const AddPlantAbout = styled.Text`
 
 export const AddPlantController = styled.View`
     background-color: ${(props) => props.theme.white};
-    padding: 20px 30px ${getBottomSpace() + "px" || "20px"};
+    padding: 20px 30px ${getBottomSpace() || 20}px;
 `;
 
 export const AddPlantTipContainer = styled.View`
@@ -65,4 +65,16 @@ export const AddPlantAlertLabel = styled.Text`
     color: ${(props) => props.theme.heading};
     font-size: 12px;
     margin-bottom: 5px;
+`;
+
+export const AddPlantDateTimePickerWrapper = styled.TouchableOpacity`
+    width: 100%;
+    align-items: center;
+    padding: 40px 0;
+`;
+
+export const AddPlantDateTimePicker = styled.Text`
+    color: ${(props) => props.theme.heading};
+    font-size: 24px;
+    font-family: ${fonts.textFont};
 `;

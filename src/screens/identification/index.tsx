@@ -25,8 +25,12 @@ const Identification: React.FC = ({}) => {
     const handleSubmit = async () => {
         if (!name) return Alert.alert("Please write your name 🤔");
 
-        await AsyncStorage.setItem("@botant:user", name);
-        navigation.navigate("Confirmation");
+        try {
+            await AsyncStorage.setItem("@botant:user", name);
+            navigation.navigate("Confirmation");
+        } catch {
+            Alert.alert("Something went wrong! 😣");
+        }
     };
 
     return (
