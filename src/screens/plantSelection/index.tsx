@@ -5,19 +5,21 @@ import Loading from "../../components/Loading";
 import PlantCardPrimary from "../../components/PlantCardPrimary";
 import api from "../../services/api";
 import { EnviromentProps, PlantsProps } from "../../utils/types";
-import { ActivityIndicator, ActivityIndicatorBase } from "react-native";
+import { ActivityIndicator } from "react-native";
 // prettier-ignore
 import { SelectionHeader, SelectionList, SelectionListPlants, SelectionListPlantsWrapper, SelectionListWrapper, SelectionSubTitle, SelectionTitle, SelectionWrapper } from "./PlantSelection.styles";
+import { useNavigation } from "@react-navigation/core";
 
 const PlantSelection: React.FC = ({}) => {
-    const [enviroments, setEnviroments] = useState<EnviromentProps[]>();
+    const navigation = useNavigation();
+
+    const [enviroments, setEnviroments] = useState<EnviromentProps[]>([]);
     const [plants, setPlants] = useState<PlantsProps[]>([]);
     const [filteredPlants, setFilteredPlants] = useState<PlantsProps[]>([]);
     const [environmentSelected, setEnvironmentSelected] = useState("all");
     const [isLoading, setIsLoading] = useState(true);
     const [page, setPage] = useState(1);
     const [loadingMore, setLoadingMore] = useState(false);
-    const [loadedAll, setLoadedAll] = useState(false);
 
     async function fetchEnviroment() {
         const { data } = await api.get(
@@ -61,6 +63,10 @@ const PlantSelection: React.FC = ({}) => {
         fetchEnviroment();
     };
 
+    const handlePlantSelect = (plant: PlantsProps): void => {
+        navigation.navigate("addPlant", { plant });
+    };
+
     useEffect(() => {
         async function fetchEnviroment() {
             const { data } = await api.get(
@@ -99,6 +105,8 @@ const PlantSelection: React.FC = ({}) => {
             <SelectionListWrapper>
                 <SelectionList
                     data={enviroments}
+                    // @ts-ignore
+                    keyExtractor={(item): any => item.key}
                     renderItem={({ item }: any) => (
                         <EnviromentButton
                             title={item.title}
@@ -115,8 +123,13 @@ const PlantSelection: React.FC = ({}) => {
             <SelectionListPlantsWrapper>
                 <SelectionListPlants
                     data={filteredPlants}
+                    // @ts-ignore
+                    keyExtractor={(item): any => String(item.id)}
                     renderItem={({ item }: any) => (
-                        <PlantCardPrimary data={item} />
+                        <PlantCardPrimary
+                            data={item}
+                            onPress={() => handlePlantSelect(item)}
+                        />
                     )}
                     showsVerticalScrollIndicator={false}
                     numColumns={2}

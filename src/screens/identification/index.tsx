@@ -1,9 +1,10 @@
 import { useNavigation } from "@react-navigation/native";
 import React, { useState } from "react";
-import { Keyboard, Platform } from "react-native";
+import { Keyboard, Platform, Alert } from "react-native";
 import Button from "../../components/Button";
 // prettier-ignore
 import { IdentificationCall, IdentificationCloseKeyboard, IdentificationContent, IdentificationEmoji, IdentificationFooter, IdentificationForm, IdentificationHeader, IdentificationInput, IdentificationKeyboard, IdentificationWrapper } from './Identification.styles';
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const Identification: React.FC = ({}) => {
     const navigation = useNavigation();
@@ -21,8 +22,10 @@ const Identification: React.FC = ({}) => {
         setName(value);
     };
 
-    const handleSubmit = () => {
-        if (!name) return;
+    const handleSubmit = async () => {
+        if (!name) return Alert.alert("Please write your name 🤔");
+
+        await AsyncStorage.setItem("@botant:user", name);
         navigation.navigate("Confirmation");
     };
 

@@ -15,3 +15,7 @@ export interface PlantsProps {
         repeat_every: string;
     };
 }
+
+export interface Params {
+    plant: PlantsProps;
+}
