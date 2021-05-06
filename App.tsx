@@ -1,5 +1,5 @@
+import React, { useEffect } from "react";
 import { StatusBar } from "expo-status-bar";
-import React from "react";
 import { ThemeProvider } from "styled-components";
 import { themes } from "./src/utils/theme";
 import { useColorScheme } from "react-native";
@@ -7,6 +7,8 @@ import { useFonts } from "expo-font";
 import { Jost_400Regular, Jost_600SemiBold } from "@expo-google-fonts/jost";
 import AppLoading from "expo-app-loading";
 import Routes from "./src/routes";
+import * as Notifications from "expo-notifications";
+import { PlantsProps } from "./src/utils/types";
 
 export default function App() {
     const deviceTheme = useColorScheme();
@@ -15,6 +17,17 @@ export default function App() {
         Jost_400Regular,
         Jost_600SemiBold,
     });
+
+    useEffect(() => {
+        const subscription = Notifications.addNotificationReceivedListener(
+            async (notification) => {
+                const data = notification.request.content.data
+                    .plant as PlantsProps;
+                console.log(data);
+            }
+        );
+        return () => subscription.remove();
+    }, []);
 
     if (!fontsLoaded) {
         return <AppLoading />;

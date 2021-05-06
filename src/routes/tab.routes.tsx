@@ -3,6 +3,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import PlantSelection from "../screens/PlantSelection";
 import { MaterialIcons } from "@expo/vector-icons";
 import MyPlants from "../screens/MyPlants";
+import { Platform } from "react-native";
 
 const Apptab = createBottomTabNavigator();
 
@@ -14,6 +15,7 @@ const AuthRoutes = () => {
                 inactiveTintColor: "#52665A",
                 labelPosition: "beside-icon",
                 style: {
+                    paddingVertical: Platform.OS === "ios" ? 20 : 0,
                     height: 68,
                 },
             }}
