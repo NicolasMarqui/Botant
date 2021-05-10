@@ -64,7 +64,7 @@ const MyPlants: React.FC = () => {
 
     return (
         <MyPlatsWrapper>
-            <Header />
+            <Header fromMyPlants />
 
             <MyPlantsSpot>
                 <MyPlantsSpotImage source={waterDrop} />

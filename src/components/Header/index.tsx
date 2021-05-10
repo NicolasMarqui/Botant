@@ -4,9 +4,11 @@ import { HeaderAvatar, HeaderGreetings, HeaderTitleWrapper, HeaderWrapper, Heade
 import avatar from "../../../assets/images/nick.png";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-interface HeaderProps {}
+interface HeaderProps {
+    fromMyPlants?: boolean;
+}
 
-const Header: React.FC<HeaderProps> = ({}) => {
+const Header: React.FC<HeaderProps> = ({ fromMyPlants = false }) => {
     const [userName, setUserName] = useState<string>();
 
     useEffect(() => {
@@ -21,8 +23,10 @@ const Header: React.FC<HeaderProps> = ({}) => {
     return (
         <HeaderWrapper>
             <HeaderTitleWrapper>
-                <HeaderGreetings>Hello</HeaderGreetings>
-                <HeaderTitle>{userName}</HeaderTitle>
+                <HeaderGreetings>
+                    {fromMyPlants ? "My" : "Hello"}
+                </HeaderGreetings>
+                <HeaderTitle>{fromMyPlants ? "Plants" : userName}</HeaderTitle>
             </HeaderTitleWrapper>
 
             <HeaderAvatar source={avatar} />
